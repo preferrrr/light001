@@ -59,4 +59,17 @@ public class MemberExceptionHandler {
         );
     }
 
+    @ExceptionHandler(NotMatchPasswordException.class)
+    public ResponseEntity<ExceptionResponse> handleNotMatchPasswordException(final NotMatchPasswordException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[not match password exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
+
+
 }
