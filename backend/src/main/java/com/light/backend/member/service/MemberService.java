@@ -40,4 +40,23 @@ public class MemberService {
         memberServiceSupport.save(member);
     }
 
+    @Transactional(readOnly = false)
+    public HttpHeaders login(LoginRequest request) {
+
+        //아이디로 멤버 조회
+        Member member = memberServiceSupport.getMemberById(request.getId());
+
+        //비밀번호 확인
+        memberServiceSupport.checkPassword(request.getPassword(), member.getPassword());
+
+        //refresh token value random uuid로 생성
+        String refreshTokenValue = memberServiceSupport.createRefreshTokenValue();
+
+        //로그인 시마다 refresh token 갱신
+        member.updateRefreshTokenValue(refreshTokenValue);
+
+        //access token, refresh token 헤더에 실어서 반환
+        return memberServiceSupport.createJwt(member.getId(), member.getRole(), refreshTokenValue);
+    }
+
 }
