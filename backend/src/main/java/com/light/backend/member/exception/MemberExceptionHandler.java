@@ -71,5 +71,28 @@ public class MemberExceptionHandler {
         );
     }
 
+    @ExceptionHandler(NotFoundMemberByRefreshTokenException.class)
+    public ResponseEntity<ExceptionResponse> handleNotFoundMemberByRefreshTokenException(final NotFoundMemberByRefreshTokenException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[not found member by refresh token exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
+
+    @ExceptionHandler(InvalidRefreshTokenException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidRefreshTokenException(final InvalidRefreshTokenException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[invalid refresh token exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
 
 }
