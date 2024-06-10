@@ -4,7 +4,6 @@ import com.light.backend.global.utils.CurrentMemberGetter;
 import com.light.backend.member.controller.dto.request.LoginRequest;
 import com.light.backend.member.controller.dto.request.SignupRequest;
 import com.light.backend.member.domain.Member;
-import com.light.backend.member.domain.MemberRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -59,4 +58,27 @@ public class MemberService {
         return memberServiceSupport.createJwt(member.getId(), member.getRole(), refreshTokenValue);
     }
 
+    @Transactional(readOnly = false)
+    public HttpHeaders reissueJwt(String cookie) {
+
+        String refreshToken = memberServiceSupport.getRefreshToken(cookie);
+
+        //refresh token 유효한지 검사
+        memberServiceSupport.verifyRefreshToken(refreshToken);
+
+        //refresh token에서 value 추출
+        String value = memberServiceSupport.getRefreshTokenValue(refreshToken);
+
+        //value(unique key => index)로 유저 찾음
+        Member member = memberServiceSupport.getMemberByRefreshToken(value);
+
+        //새로운 리프레시 토큰 value
+        String newRefreshTokenValue = memberServiceSupport.createRefreshTokenValue();
+
+        //리프레시 토큰 갱신
+        member.updateRefreshTokenValue(newRefreshTokenValue);
+
+        //새로운 Jwt가 포함된 헤더 반환
+        return memberServiceSupport.createJwt(member.getId(), member.getRole(), newRefreshTokenValue);
+    }
 }
