@@ -7,6 +7,10 @@ import com.light.backend.member.domain.MemberRole;
 import com.light.backend.member.repository.repository.MemberRepository;
 import com.light.backend.member.service.MemberService;
 import com.light.backend.member.service.MemberServiceSupport;
+import com.light.backend.slot.repository.SlotRepository;
+import com.light.backend.slot.service.SlotService;
+import com.light.backend.slot.service.SlotServiceSupport;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,21 +22,28 @@ public abstract class IntegrationTestSupporter {
 
     @Autowired
     protected MemberService memberService;
+    @Autowired
+    protected SlotService slotService;
 
     @Autowired
     protected MemberRepository memberRepository;
+    @Autowired
+    protected SlotRepository slotRepository;
 
     @MockBean
     protected CurrentMemberGetter currentMemberGetter;
 
     @SpyBean
     protected MemberServiceSupport memberServiceSupport;
+    @SpyBean
+    protected SlotServiceSupport slotServiceSupport;
 
     @SpyBean
     protected JwtProvider jwtProvider;
 
     protected static final String MASTER = "master";
     protected static final String ADMIN = "admin";
+    protected static final String ADMIN_2 = "admin2";
     protected static final String MEMBER = "member";
     protected static final String PASSWORD = "password";
     protected static final String ACCESS_TOKEN = "accessToken";
@@ -46,5 +57,11 @@ public abstract class IntegrationTestSupporter {
         master = Member.create(MASTER, memberServiceSupport.encryptPassword(PASSWORD), MemberRole.MASTER, null);
         master.updateRefreshTokenValue(REFRESH_TOKEN_VALUE);
         memberRepository.save(master);
+    }
+
+    @AfterEach
+    void tearDown() {
+        slotRepository.deleteAllInBatch();
+        memberRepository.deleteAllInBatch();
     }
 }

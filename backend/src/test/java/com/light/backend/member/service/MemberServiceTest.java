@@ -6,7 +6,6 @@ import com.light.backend.member.controller.dto.request.SignupRequest;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
 import com.light.backend.member.exception.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -15,11 +14,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 class MemberServiceTest extends IntegrationTestSupporter {
-
-    @AfterEach
-    void tearDown() {
-        memberRepository.deleteAllInBatch();
-    }
 
     @DisplayName("MASTER가 ADMIN을 회원가입 시켜준다.")
     @Test
