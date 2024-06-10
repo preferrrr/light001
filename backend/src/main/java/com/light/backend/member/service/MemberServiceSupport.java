@@ -77,6 +77,21 @@ public class MemberServiceSupport {
         return headers;
     }
 
+    public void verifyRefreshToken(String refreshToken) {
+        jwtProvider.verifyRefreshToken(refreshToken);
+    }
+
+    public Member getMemberByRefreshToken(String refreshToken) {
+        return memberRepository.findByRefreshTokenValue(refreshToken).orElseThrow(NotFoundMemberByRefreshTokenException::new);
+    }
+
+    public String getRefreshToken(String cookie) {
+        return cookie.substring(REFRESH_TOKEN.length() + 1, cookie.indexOf(";")) ;
+    }
+
+    public String getRefreshTokenValue(String refreshToken) {
+        return jwtProvider.getValue(refreshToken);
+    }
 
 
 
