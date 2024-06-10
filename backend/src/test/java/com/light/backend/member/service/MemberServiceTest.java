@@ -1,15 +1,18 @@
 package com.light.backend.member.service;
 
 import com.light.backend.IntegrationTestSupporter;
+import com.light.backend.member.controller.dto.request.LoginRequest;
 import com.light.backend.member.controller.dto.request.SignupRequest;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
 import com.light.backend.member.exception.ExistsIdException;
 import com.light.backend.member.exception.NotFoundMemberException;
+import com.light.backend.member.exception.NotMatchPasswordException;
 import com.light.backend.member.exception.UnauthorizedCreateMemberException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
@@ -147,5 +150,52 @@ class MemberServiceTest extends IntegrationTestSupporter {
                 .isInstanceOf(NotFoundMemberException.class);
 
     }
+
+    @DisplayName("로그인에 성공하면, access token과 refresh token이 포함된 헤더를 반환한다.")
+    @Test
+    void loginTest_success() {
+
+        /** given */
+
+        doReturn(ACCESS_TOKEN).when(jwtProvider).createAccessToken(anyString(), any(MemberRole.class));
+        doReturn(REFRESH_TOKEN_VALUE).when(memberServiceSupport).createRefreshTokenValue();
+        doReturn(REFRESH_TOKEN).when(jwtProvider).createRefreshToken(anyString());
+
+        LoginRequest loginRequest = LoginRequest.builder()
+                .id(MASTER)
+                .password(PASSWORD)
+                .build();
+
+        /** when */
+
+        HttpHeaders resultHeader = memberService.login(loginRequest);
+
+        /** then */
+
+        Member member = memberRepository.findById(MASTER).get();
+
+        assertThat(member.getRefreshTokenValue()).isEqualTo(REFRESH_TOKEN_VALUE);
+        assertThat(resultHeader.get("Authorization").get(0)).isEqualTo(ACCESS_TOKEN);
+        assertThat(resultHeader.get("Cookie").get(0)).isNotBlank();
+
+    }
+
+    @DisplayName("비밀번호가 틀리면, NotMatchPasswordException을 반환한다.")
+    @Test
+    void loginTest_fail() {
+
+        /** given */
+        LoginRequest loginRequest = LoginRequest.builder()
+                .id(MASTER)
+                .password("failPassword")
+                .build();
+
+        /** when then */
+
+        assertThatThrownBy(() -> memberService.login(loginRequest))
+                .isInstanceOf(NotMatchPasswordException.class);
+
+    }
+
 
 }
