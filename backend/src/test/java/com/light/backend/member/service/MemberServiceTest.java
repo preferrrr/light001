@@ -5,10 +5,7 @@ import com.light.backend.member.controller.dto.request.LoginRequest;
 import com.light.backend.member.controller.dto.request.SignupRequest;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
-import com.light.backend.member.exception.ExistsIdException;
-import com.light.backend.member.exception.NotFoundMemberException;
-import com.light.backend.member.exception.NotMatchPasswordException;
-import com.light.backend.member.exception.UnauthorizedCreateMemberException;
+import com.light.backend.member.exception.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -197,5 +194,67 @@ class MemberServiceTest extends IntegrationTestSupporter {
 
     }
 
+    @DisplayName("refresh token 검증에 성공하면, access token과 refresh token이 포함된 헤더를 반환한다.")
+    @Test
+    void reissueJwt_success() {
+
+        /** given */
+
+        final String newRefreshTokenValue = "newRefreshTokenValue";
+
+        doReturn(REFRESH_TOKEN).when(memberServiceSupport).getRefreshToken(anyString());
+        doNothing().when(memberServiceSupport).verifyRefreshToken(anyString());
+        doReturn(REFRESH_TOKEN_VALUE).when(memberServiceSupport).getRefreshTokenValue(anyString());
+        doReturn(newRefreshTokenValue).when(memberServiceSupport).createRefreshTokenValue();
+        doReturn(ACCESS_TOKEN).when(jwtProvider).createAccessToken(anyString(), any(MemberRole.class));
+        doReturn(REFRESH_TOKEN).when(jwtProvider).createRefreshToken(anyString());
+
+        /** when */
+
+        HttpHeaders resultHeader = memberService.reissueJwt("cookie");
+
+        /** then */
+
+        Member member = memberRepository.findById(MASTER).get();
+        assertThat(member.getRefreshTokenValue()).isEqualTo(newRefreshTokenValue);
+        assertThat(resultHeader.get("Authorization").get(0)).isEqualTo(ACCESS_TOKEN);
+        assertThat(resultHeader.get("Cookie").get(0)).isNotBlank();
+
+    }
+
+    @DisplayName("유효하지 않은 refresh token이라면, InvalidRefreshTokenException을 반환한다.")
+    @Test
+    void reissueJwt_fail1() {
+
+        /** given */
+
+        doReturn("invalidRefreshToken").when(memberServiceSupport).getRefreshToken(anyString());
+
+        /** when then */
+
+        assertThatThrownBy(()-> memberService.reissueJwt("cookie"))
+                .isInstanceOf(InvalidRefreshTokenException.class);
+
+    }
+
+    @DisplayName("refresh token value로 사용자를 찾을 수 없으면, NotFoundMemberByRefreshTokenException을 반환한다.")
+    @Test
+    void reissueJwt_fail2() {
+
+        /** given */
+
+        final String invalidRefreshToken = "invalidRefreshToken";
+        final String invalidRefreshTokenValue = "invalidRefreshTokenValue";
+
+        doReturn(invalidRefreshToken).when(memberServiceSupport).getRefreshToken(anyString());
+        doNothing().when(memberServiceSupport).verifyRefreshToken(anyString());
+        doReturn(invalidRefreshTokenValue).when(memberServiceSupport).getRefreshTokenValue(anyString());
+
+        /** when then */
+
+        assertThatThrownBy(()-> memberService.reissueJwt("cookie"))
+                .isInstanceOf(NotFoundMemberByRefreshTokenException.class);
+
+    }
 
 }

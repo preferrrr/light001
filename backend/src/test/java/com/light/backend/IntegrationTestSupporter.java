@@ -44,6 +44,7 @@ public abstract class IntegrationTestSupporter {
     @BeforeEach
     void setUp() {
         master = Member.create(MASTER, memberServiceSupport.encryptPassword(PASSWORD), MemberRole.MASTER, null);
+        master.updateRefreshTokenValue(REFRESH_TOKEN_VALUE);
         memberRepository.save(master);
     }
 }
