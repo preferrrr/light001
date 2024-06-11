@@ -34,4 +34,28 @@ public class SlotExceptionHandler {
                 exceptionCode.getHttpStatus()
         );
     }
+
+    @ExceptionHandler(NotFoundSlotException.class)
+    public ResponseEntity<ExceptionResponse> handleNotFoundSlotException(final NotFoundSlotException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[not found slot exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
+
+    @ExceptionHandler(UnauthorizedSetSlotDataException.class)
+    public ResponseEntity<ExceptionResponse> handleUnauthorizedSetSlotDataException(final UnauthorizedSetSlotDataException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[unauthorized set slot data exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
 }
