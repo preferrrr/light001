@@ -2,6 +2,7 @@ package com.light.backend.slot.domain;
 
 import com.light.backend.global.BaseEntity;
 import com.light.backend.member.domain.Member;
+import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -28,10 +29,10 @@ public class Slot extends BaseEntity {
     private Member owner;
 
     @Column
-    private Long mid;
+    private String mid;
 
     @Column(name = "origin_mid")
-    private Long originMid;
+    private String originMid;
 
     @Column(name = "start_at")
     private LocalDate startAt;
@@ -44,6 +45,9 @@ public class Slot extends BaseEntity {
 
     @Column(name = "rank_keyword", length = 30)
     private String rankKeyword;
+
+    @Column(name = "current_rank")
+    private int currentRank = 0;
 
     @Column
     private String description;
@@ -63,4 +67,20 @@ public class Slot extends BaseEntity {
                 .build();
     }
 
+    public void setData(SetSlotDataRequest request) {
+        this.mid = request.getMid();
+        this.originMid = request.getOriginMid();
+        this.startAt = LocalDate.now();
+        this.endAt = this.startAt.plusDays(request.getDay());
+        this.workKeyword = request.getWorkKeyword();
+        this.rankKeyword = request.getRankKeyword();
+        this.description = request.getDescription();
+    }
+
+    public void updateErrorState(boolean isError) {
+        if (isError)
+            this.slotErrorState = SlotErrorState.Y;
+        else
+            this.slotErrorState = SlotErrorState.N;
+    }
 }
