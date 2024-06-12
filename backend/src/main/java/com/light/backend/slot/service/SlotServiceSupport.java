@@ -2,13 +2,13 @@ package com.light.backend.slot.service;
 
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
+import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.Slot;
-import com.light.backend.slot.exception.NotCreatedByAdminException;
-import com.light.backend.slot.exception.NotFoundSlotException;
-import com.light.backend.slot.exception.UnauthorizedCreateSlotException;
-import com.light.backend.slot.exception.UnauthorizedSetSlotDataException;
+import com.light.backend.slot.exception.*;
 import com.light.backend.slot.repository.SlotRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -42,5 +42,23 @@ public class SlotServiceSupport {
         if (!currentMember.getRole().equals(MemberRole.MASTER) && slotOwner.getCreatedBy().getId() != currentMember.getId() && slotOwner.getId() != currentMember.getId()) {
             throw new UnauthorizedSetSlotDataException();
         }
+    }
+
+    public void checkQueryString(String type, String value) {
+        if ((type == null && value != null) || //타입이 null인데, 값이 null이 아닌 경우
+                (type != null && !checkIsValidType(type)) || //타입이 유효하지 않은 경우
+                ((type != null && checkIsValidType(type)) && (value == null || value.isBlank())) //타입은 유효한데, 값이 null 또는 공백인 경우
+        ) {
+            throw new InvalidQueryStringForGetSlotsException();
+        }
+    }
+
+    private boolean checkIsValidType(String type) {
+        return type.equals("id") || type.equals("ownerId") || type.equals("adminId") || type.equals("mid") ||
+                type.equals("originMid") || type.equals("rankKeyword") || type.equals("workKeyword") || type.equals("description");
+    }
+
+    public Page<SearchSlotResponse> getSlotByTypeAndValue(Member member, String type, String value, Pageable pageable) {
+        return slotRepository.findSlotByTypeAndValue(member, type, value, pageable);
     }
 }
