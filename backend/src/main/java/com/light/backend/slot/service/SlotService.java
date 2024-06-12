@@ -5,8 +5,11 @@ import com.light.backend.member.domain.Member;
 import com.light.backend.member.service.MemberServiceSupport;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
+import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.Slot;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,6 +62,18 @@ public class SlotService {
 
         slot.updateErrorState(isError);
 
+    }
+
+    public Page<SearchSlotResponse> getSlots(String type, String value, Pageable pageable) {
+
+        //현재 멤버
+        Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
+
+        //유효한 쿼리스트링 확인
+        slotServiceSupport.checkQueryString(type, value);
+
+        //현재 멤버가 마스터면 전부 다, 어드민이면 자기가 관리하고 있는거만, 일반이면 자기꺼만
+        return slotServiceSupport.getSlotByTypeAndValue(currentMember, type, value, pageable);
     }
 
 }
