@@ -58,4 +58,16 @@ public class SlotExceptionHandler {
                 exceptionCode.getHttpStatus()
         );
     }
+
+    @ExceptionHandler(InvalidQueryStringForGetSlotsException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidQueryStringForGetSlotsException(final InvalidQueryStringForGetSlotsException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[invalid query string for get slots exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
 }

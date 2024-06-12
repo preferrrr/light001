@@ -15,6 +15,7 @@ public enum SlotExceptionCode implements ExceptionCode {
     NOT_CREATED_BY_ADMIN(UNAUTHORIZED, "S002", "담당자가 아닙니다."),
     NOT_FOUND_SLOT(NOT_FOUND, "S003", "슬롯을 찾을 수 없습니다."),
     UNAUTHORIZED_SET_SLOT_DATA(UNAUTHORIZED, "S004", "슬롯 데이터를 입력할 권한이 없습니다."),
+    INVALID_QUERY_STRING_FOR_GET_SLOTS(BAD_REQUEST, "S005", "잘못된 슬롯 조회 쿼리 스트링 입니다.")
     ;
 
     private final HttpStatus httpStatus;
