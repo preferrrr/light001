@@ -3,6 +3,8 @@ package com.light.backend.slot.controller.dto.request;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Getter
 public class SetSlotDataRequest {
 
@@ -11,6 +13,8 @@ public class SetSlotDataRequest {
     private String mid;
 
     private String originMid;
+
+    private LocalDate startAt;
 
     private int day;
 
@@ -21,10 +25,11 @@ public class SetSlotDataRequest {
     private String description;
 
     @Builder
-    public SetSlotDataRequest(Long id, String mid, String originMid, int day, String workKeyword, String rankKeyword, String description) {
+    public SetSlotDataRequest(Long id, String mid, String originMid, LocalDate startAt, int day, String workKeyword, String rankKeyword, String description) {
         this.id = id;
         this.mid = mid;
         this.originMid = originMid;
+        this.startAt = startAt;
         this.day = day;
         this.workKeyword = workKeyword;
         this.rankKeyword = rankKeyword;

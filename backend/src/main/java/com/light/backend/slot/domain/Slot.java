@@ -70,7 +70,7 @@ public class Slot extends BaseEntity {
     public void setData(SetSlotDataRequest request) {
         this.mid = request.getMid();
         this.originMid = request.getOriginMid();
-        this.startAt = LocalDate.now();
+        this.startAt = request.getStartAt();
         this.endAt = this.startAt.plusDays(request.getDay());
         this.workKeyword = request.getWorkKeyword();
         this.rankKeyword = request.getRankKeyword();
