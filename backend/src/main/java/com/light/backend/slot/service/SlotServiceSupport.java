@@ -2,6 +2,7 @@ package com.light.backend.slot.service;
 
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
+import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.exception.*;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 
 @Service
@@ -60,5 +63,9 @@ public class SlotServiceSupport {
 
     public Page<SearchSlotResponse> getSlotByTypeAndValue(Member member, String type, String value, Pageable pageable) {
         return slotRepository.findSlotByTypeAndValue(member, type, value, pageable);
+    }
+
+    public GetDashboardResponse getDashboard(Member member, LocalDate now) {
+        return slotRepository.getDashboard(member, now);
     }
 }
