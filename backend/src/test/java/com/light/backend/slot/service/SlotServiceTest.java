@@ -5,6 +5,7 @@ import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
+import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.SlotErrorState;
 import com.light.backend.slot.domain.Slot;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,6 +131,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                 .id(slot.getId())
                 .mid(MID)
                 .originMid(ORIGIN_MID)
+                .startAt(LocalDate.of(2024, 5, 30))
                 .rankKeyword(RANK_KEYWORD)
                 .workKeyword(WORK_KEYWORD)
                 .day(10)
@@ -173,6 +176,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                 .id(slot.getId())
                 .mid(MID)
                 .originMid(ORIGIN_MID)
+                .startAt(LocalDate.of(2024, 5, 30))
                 .rankKeyword(RANK_KEYWORD)
                 .workKeyword(WORK_KEYWORD)
                 .day(10)
@@ -218,6 +222,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                 .id(slot.getId())
                 .mid(MID)
                 .originMid(ORIGIN_MID)
+                .startAt(LocalDate.of(2024, 5, 30))
                 .rankKeyword(RANK_KEYWORD)
                 .workKeyword(WORK_KEYWORD)
                 .day(10)
@@ -334,6 +339,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -380,6 +386,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -395,6 +402,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID_2)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -446,6 +454,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -461,6 +470,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -476,6 +486,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -524,6 +535,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -539,6 +551,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -554,6 +567,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -602,6 +616,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -617,6 +632,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -632,6 +648,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
                     SetSlotDataRequest.builder()
                             .mid(MID)
                             .originMid(ORIGIN_MID)
+                            .startAt(LocalDate.of(2024, 5, 30))
                             .rankKeyword(RANK_KEYWORD)
                             .workKeyword(WORK_KEYWORD)
                             .description(DESCRIPTION)
@@ -716,6 +733,262 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         assertThatThrownBy(() -> slotService.getSlots("invalid", "value", PageRequest.of(0, 3)))
                 .isInstanceOf(InvalidQueryStringForGetSlotsException.class);
+
+    }
+
+    @DisplayName("MASTER가 대시보드를 조회하면, 슬롯 전체의 통계를 구한다.")
+    @Test
+    void getDashboard_success1() {
+
+        /** given */
+
+        doReturn(MASTER).when(currentMemberGetter).getCurrentMemberId();
+
+        Member admin = Member.create(ADMIN, PASSWORD, MemberRole.ADMIN, master);
+        memberRepository.save(admin);
+
+        Slot slot1 = Slot.create(admin);
+        slot1.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 5)) // 만료 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot2 = Slot.create(admin);
+        slot2.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 4)) // 만료된지 이틀 지났기 때문에 아무 슬롯 아님
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot3 = Slot.create(admin);
+        slot3.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 6)) // 만료 예정 슬롯, 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+        slot3.updateErrorState(true); // 오류 슬롯
+
+        Slot slot4 = Slot.create(admin);
+        slot4.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 10)) // 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot5 = Slot.create(admin); //대기 슬롯
+
+        slotRepository.saveAll(List.of(slot1, slot2, slot3, slot4, slot5));
+
+        /** when */
+
+        GetDashboardResponse response = slotService.getDashboard(LocalDate.of(2024, 1, 15));
+        //endAt이14일 인것만 만료 슬롯으로 조회되어야 함.
+
+        /** then */
+
+        assertThat(response.getTotal()).isEqualTo(5);
+        assertThat(response.getClosed()).isEqualTo(1);
+        assertThat(response.getRunning()).isEqualTo(2);
+        assertThat(response.getWaiting()).isEqualTo(1);
+        assertThat(response.getExpiring()).isEqualTo(1);
+        assertThat(response.getError()).isEqualTo(1);
+
+    }
+
+    @DisplayName("ADMIN이 대시보드를 조회하면, 자신거와 자신이 생성한 일반 계정 슬롯 통계를 구한다.")
+    @Test
+    void getDashboard_success2() {
+
+        /** given */
+
+        doReturn(ADMIN).when(currentMemberGetter).getCurrentMemberId();
+
+        Member admin = Member.create(ADMIN, PASSWORD, MemberRole.ADMIN, master);
+        Member member = Member.create(MEMBER, PASSWORD, MemberRole.MEMBER, admin);
+        Member admin2 = Member.create(ADMIN_2, PASSWORD, MemberRole.MEMBER, master);
+        memberRepository.saveAll(List.of(admin, member, admin2));
+
+        Slot slot1 = Slot.create(admin);
+        slot1.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 5)) // 만료 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot2 = Slot.create(member);
+        slot2.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 4)) // 만료된지 이틀 지났기 때문에 아무 슬롯 아님
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot3 = Slot.create(member);
+        slot3.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 6)) // 만료 예정 슬롯, 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+        slot3.updateErrorState(true); // 오류 슬롯
+
+        Slot slot4 = Slot.create(member);
+        slot4.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 10)) // 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot5 = Slot.create(admin2); //대기 슬롯
+
+        slotRepository.saveAll(List.of(slot1, slot2, slot3, slot4, slot5));
+
+        /** when */
+
+        GetDashboardResponse response = slotService.getDashboard(LocalDate.of(2024, 1, 15));
+        //endAt이14일 인것만 만료 슬롯으로 조회되어야 함.
+
+        /** then */
+
+        assertThat(response.getTotal()).isEqualTo(4);
+        assertThat(response.getClosed()).isEqualTo(1);
+        assertThat(response.getRunning()).isEqualTo(2);
+        assertThat(response.getWaiting()).isEqualTo(0);
+        assertThat(response.getExpiring()).isEqualTo(1);
+        assertThat(response.getError()).isEqualTo(1);
+
+    }
+
+    @DisplayName("MEMBER가 대시보드를 조회하면, 자신거만 슬롯 통계를 구한다.")
+    @Test
+    void getDashboard_success3() {
+
+        /** given */
+
+        doReturn(MEMBER).when(currentMemberGetter).getCurrentMemberId();
+
+        Member admin = Member.create(ADMIN, PASSWORD, MemberRole.ADMIN, master);
+        Member member = Member.create(MEMBER, PASSWORD, MemberRole.MEMBER, admin);
+        Member member2 = Member.create(MEMBER_2, PASSWORD, MemberRole.MEMBER, master);
+        memberRepository.saveAll(List.of(admin, member, member2));
+
+        Slot slot1 = Slot.create(admin);
+        slot1.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 5)) // 만료 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot2 = Slot.create(member);
+        slot2.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 4)) // 만료된지 이틀 지났기 때문에 아무 슬롯 아님
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot3 = Slot.create(member);
+        slot3.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 6)) // 만료 예정 슬롯, 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+        slot3.updateErrorState(true); // 오류 슬롯
+
+        Slot slot4 = Slot.create(member);
+        slot4.setData(
+                SetSlotDataRequest.builder()
+                        .mid(MID)
+                        .originMid(ORIGIN_MID)
+                        .startAt(LocalDate.of(2024, 1, 10)) // 구동 슬롯
+                        .rankKeyword(RANK_KEYWORD)
+                        .workKeyword(WORK_KEYWORD)
+                        .description(DESCRIPTION)
+                        .day(9)
+                        .build()
+        );
+
+        Slot slot5 = Slot.create(member2); //대기 슬롯
+
+        slotRepository.saveAll(List.of(slot1, slot2, slot3, slot4, slot5));
+
+        /** when */
+
+        GetDashboardResponse response = slotService.getDashboard(LocalDate.of(2024, 1, 15));
+        //endAt이14일 인것만 만료 슬롯으로 조회되어야 함.
+
+        /** then */
+
+        assertThat(response.getTotal()).isEqualTo(3);
+        assertThat(response.getClosed()).isEqualTo(0);
+        assertThat(response.getRunning()).isEqualTo(2);
+        assertThat(response.getWaiting()).isEqualTo(0);
+        assertThat(response.getExpiring()).isEqualTo(1);
+        assertThat(response.getError()).isEqualTo(1);
 
     }
 
