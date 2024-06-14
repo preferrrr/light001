@@ -14,7 +14,12 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "slot")
+@Table(name = "slot", indexes = {
+        @Index(name = "idx_origin_mid", columnList = "origin_mid"),
+        @Index(name = "idx_mid", columnList = "mid"),
+        @Index(name = "idx_end_at", columnList = "end_at"),
+        @Index(name = "idx_start_at_end_at_error_state", columnList = "start_at, end_at, slot_error_state")
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert @DynamicUpdate
@@ -52,7 +57,7 @@ public class Slot extends BaseEntity {
     @Column
     private String description;
 
-    @Column
+    @Column(name = "slot_error_state")
     @Enumerated(EnumType.STRING)
     private SlotErrorState slotErrorState =  SlotErrorState.D;
 
