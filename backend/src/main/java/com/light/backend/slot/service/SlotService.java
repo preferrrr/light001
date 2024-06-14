@@ -5,6 +5,7 @@ import com.light.backend.member.domain.Member;
 import com.light.backend.member.service.MemberServiceSupport;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
+import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.Slot;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -76,4 +79,12 @@ public class SlotService {
         return slotServiceSupport.getSlotByTypeAndValue(currentMember, type, value, pageable);
     }
 
+    public GetDashboardResponse getDashboard(LocalDate now) {
+
+        //현재 멤버
+        Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
+
+        //대시 보드로 슬롯 현황 통계 조회
+        return slotServiceSupport.getDashboard(currentMember, now);
+    }
 }
