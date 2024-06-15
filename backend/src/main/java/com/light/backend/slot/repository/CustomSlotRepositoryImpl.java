@@ -7,7 +7,6 @@ import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
 import com.light.backend.slot.domain.QSlot;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.domain.SlotErrorState;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.NumberExpression;
