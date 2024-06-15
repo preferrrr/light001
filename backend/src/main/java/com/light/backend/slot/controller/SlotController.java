@@ -6,6 +6,7 @@ import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.service.SlotService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,7 @@ public class SlotController {
      * /slots
      */
     @PostMapping("")
-    public ApiResponse<Void> createSlot(@RequestBody CreateSlotRequest request) {
+    public ApiResponse<Void> createSlot(@RequestBody @Valid CreateSlotRequest request) {
 
         slotService.createSlot(request);
 
@@ -44,7 +45,7 @@ public class SlotController {
      * /slots
      */
     @PatchMapping("")
-    public ApiResponse<Void> setSlotData(@RequestBody SetSlotDataRequest request) {
+    public ApiResponse<Void> setSlotData(@RequestBody @Valid SetSlotDataRequest request) {
 
         slotService.setSlotData(request);
 
