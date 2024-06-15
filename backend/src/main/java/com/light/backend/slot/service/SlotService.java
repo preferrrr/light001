@@ -3,6 +3,7 @@ package com.light.backend.slot.service;
 import com.light.backend.global.utils.CurrentMemberGetter;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.service.MemberServiceSupport;
+import com.light.backend.naver.NaverOpenApiService;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
@@ -24,6 +25,7 @@ public class SlotService {
     private final SlotServiceSupport slotServiceSupport;
     private final MemberServiceSupport memberServiceSupport;
     private final CurrentMemberGetter currentMemberGetter;
+    private final NaverOpenApiService naverOpenApiService;
 
     @Transactional(readOnly = false)
     public void createSlot(CreateSlotRequest request) {
@@ -61,8 +63,10 @@ public class SlotService {
         //슬롯 데이터 수정
         slot.setData(request);
 
-        boolean isError = false; //네이버 open api 호출
+        //네이버 open api로 잘못된 origin mid인지 확인
+        boolean isError = naverOpenApiService.checkIsErrorSlot(request.getRankKeyword(), request.getOriginMid()); //네이버 open api 호출
 
+        //error state default에서 변경
         slot.updateErrorState(isError);
 
     }
