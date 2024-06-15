@@ -5,10 +5,13 @@ import com.light.backend.member.domain.MemberRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SignupRequest {
 
     @NotBlank(message = "아이디은 null 또는 공백일 수 없습니다.")
