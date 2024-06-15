@@ -3,11 +3,16 @@ package com.light.backend.member.service;
 import com.light.backend.global.utils.CurrentMemberGetter;
 import com.light.backend.member.controller.dto.request.LoginRequest;
 import com.light.backend.member.controller.dto.request.SignupRequest;
+import com.light.backend.member.controller.dto.response.GetMembersResponse;
 import com.light.backend.member.domain.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @Transactional(readOnly = true)
@@ -80,5 +85,14 @@ public class MemberService {
 
         //새로운 Jwt가 포함된 헤더 반환
         return memberServiceSupport.createJwt(member.getId(), member.getRole(), newRefreshTokenValue);
+    }
+
+    public Page<GetMembersResponse> getMembers(Pageable pageable, LocalDate now) {
+
+        Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
+
+        memberServiceSupport.checkGetMembersAuthority(currentMember.getRole());
+
+        return memberServiceSupport.getMembersWithSlotCountById(currentMember, now, pageable);
     }
 }
