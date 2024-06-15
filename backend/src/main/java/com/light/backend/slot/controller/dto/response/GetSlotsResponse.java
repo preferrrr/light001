@@ -1,17 +1,14 @@
 package com.light.backend.slot.controller.dto.response;
 
-import com.light.backend.member.domain.Member;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.domain.SlotErrorState;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.naming.directory.SearchResult;
 import java.time.LocalDate;
 
 @Getter
-public class SearchSlotResponse {
+public class GetSlotsResponse {
 
     private Long id;
 
@@ -38,7 +35,7 @@ public class SearchSlotResponse {
     private SlotErrorState slotErrorState;
 
     @Builder
-    private SearchSlotResponse(Slot slot) {
+    private GetSlotsResponse(Slot slot) {
         this.id = slot.getId();
         this.ownerId = slot.getOwner().getId();
         this.adminId = slot.getOwner().getCreatedBy().getId();
@@ -53,7 +50,7 @@ public class SearchSlotResponse {
         this.slotErrorState = slot.getSlotErrorState();
     }
 
-    public static SearchSlotResponse of(Slot slot) {
-        return new SearchSlotResponse(slot);
+    public static GetSlotsResponse of(Slot slot) {
+        return new GetSlotsResponse(slot);
     }
 }

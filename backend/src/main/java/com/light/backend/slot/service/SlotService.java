@@ -7,7 +7,7 @@ import com.light.backend.naver.NaverOpenApiService;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
-import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
+import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.domain.Slot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -71,7 +71,7 @@ public class SlotService {
 
     }
 
-    public Page<SearchSlotResponse> getSlots(String type, String value, Pageable pageable) {
+    public Page<GetSlotsResponse> getSlots(String type, String value, Pageable pageable) {
 
         //현재 멤버
         Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());

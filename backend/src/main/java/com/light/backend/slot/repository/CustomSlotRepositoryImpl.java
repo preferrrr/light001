@@ -3,7 +3,7 @@ package com.light.backend.slot.repository;
 import com.light.backend.member.domain.Member;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.QGetDashboardResponse;
-import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
+import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.domain.QSlot;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.domain.SlotErrorState;
@@ -32,7 +32,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
     private QSlot slot = QSlot.slot;
 
     @Override
-    public Page<SearchSlotResponse> findSlotByTypeAndValue(Member currentMember, String type, String value, Pageable pageable) {
+    public Page<GetSlotsResponse> findSlotByTypeAndValue(Member currentMember, String type, String value, Pageable pageable) {
 
         List<Slot> slots = jpaQueryFactory
                 .selectFrom(slot)
@@ -54,7 +54,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
         return new PageImpl<>(
                 slots.stream()
-                        .map(s -> SearchSlotResponse.of(s))
+                        .map(s -> GetSlotsResponse.of(s))
                         .toList(),
                 pageable,
                 count

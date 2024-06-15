@@ -3,7 +3,7 @@ package com.light.backend.slot.service;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
-import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
+import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.exception.*;
 import com.light.backend.slot.repository.SlotRepository;
@@ -61,7 +61,7 @@ public class SlotServiceSupport {
                 type.equals("originMid") || type.equals("rankKeyword") || type.equals("workKeyword") || type.equals("description");
     }
 
-    public Page<SearchSlotResponse> getSlotByTypeAndValue(Member member, String type, String value, Pageable pageable) {
+    public Page<GetSlotsResponse> getSlotByTypeAndValue(Member member, String type, String value, Pageable pageable) {
         return slotRepository.findSlotByTypeAndValue(member, type, value, pageable);
     }
 

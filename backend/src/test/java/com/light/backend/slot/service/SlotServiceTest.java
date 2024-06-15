@@ -6,7 +6,7 @@ import com.light.backend.member.domain.MemberRole;
 import com.light.backend.slot.controller.dto.request.CreateSlotRequest;
 import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
-import com.light.backend.slot.controller.dto.response.SearchSlotResponse;
+import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.domain.SlotErrorState;
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.exception.InvalidQueryStringForGetSlotsException;
@@ -353,7 +353,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         /** when */
 
-        Page<SearchSlotResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
+        Page<GetSlotsResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
 
         /** then */
 
@@ -416,7 +416,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         /** when */
 
-        Page<SearchSlotResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
+        Page<GetSlotsResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
 
         /** then */
 
@@ -500,7 +500,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         /** when */
 
-        Page<SearchSlotResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
+        Page<GetSlotsResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
 
         /** then */
 
@@ -581,7 +581,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         /** when */
 
-        Page<SearchSlotResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
+        Page<GetSlotsResponse> result = slotService.getSlots("mid", MID, PageRequest.of(0, 3));
 
         /** then */
 
@@ -662,7 +662,7 @@ class SlotServiceTest extends IntegrationTestSupporter {
 
         /** when */
 
-        Page<SearchSlotResponse> result = slotService.getSlots(null, null, PageRequest.of(0, 3));
+        Page<GetSlotsResponse> result = slotService.getSlots(null, null, PageRequest.of(0, 3));
 
         /** then */
 
