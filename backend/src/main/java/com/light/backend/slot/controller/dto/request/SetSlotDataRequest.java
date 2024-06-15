@@ -1,6 +1,7 @@
 package com.light.backend.slot.controller.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SetSlotDataRequest {
 
-    @NotBlank(message = "id는 null 또는 공백일 수 없습니다.")
+    @NotNull(message = "id는 null 또는 공백일 수 없습니다.")
     private Long id;
 
     @NotBlank(message = "mid는 null 또는 공백일 수 없습니다.")
@@ -21,10 +22,10 @@ public class SetSlotDataRequest {
     @NotBlank(message = "원부 mid는 null 또는 공백일 수 없습니다.")
     private String originMid;
 
-    @NotBlank(message = "시작날짜는 null 또는 공백일 수 없습니다.")
+    @NotNull(message = "시작날짜는 null 또는 공백일 수 없습니다.")
     private LocalDate startAt;
 
-    @NotBlank(message = "day는 null 또는 공백일 수 없습니다.")
+    @NotNull(message = "day는 null 또는 공백일 수 없습니다.")
     private int day;
 
     @NotBlank(message = "작업 키워드는 null 또는 공백일 수 없습니다.")
