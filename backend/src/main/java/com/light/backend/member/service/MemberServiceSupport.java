@@ -1,16 +1,20 @@
 package com.light.backend.member.service;
 
 import com.light.backend.global.jwt.JwtProvider;
+import com.light.backend.member.controller.dto.response.GetMembersResponse;
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
 import com.light.backend.member.exception.*;
 import com.light.backend.member.repository.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static com.light.backend.member.domain.MemberRole.*;
@@ -94,5 +98,12 @@ public class MemberServiceSupport {
     }
 
 
+    public void checkGetMembersAuthority(MemberRole role) {
+        if (!role.equals(ADMIN) && !role.equals(MASTER))
+            throw new UnauthorizedGetMembersException();
+    }
 
+    public Page<GetMembersResponse> getMembersWithSlotCountById(Member currentMember, LocalDate now, Pageable pageable) {
+        return memberRepository.getMembersWithSlotCountById(currentMember, now,  pageable);
+    }
 }
