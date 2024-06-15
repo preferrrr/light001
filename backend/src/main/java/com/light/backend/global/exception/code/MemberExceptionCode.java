@@ -15,9 +15,10 @@ public enum MemberExceptionCode implements ExceptionCode {
     UNAUTHORIZED_CREATE_MEMBER(UNAUTHORIZED, "M002", "사용자를 생성할 권한이 없습니다."),
     EXISTS_ID(CONFLICT, "M003", "이미 존재하는 아이디입니다."),
     NOT_MATCH_PASSWORD(BAD_REQUEST, "M004", "비밀번호가 틀렸습니다."),
-    NOT_FOUND_MEMBER_BY_REFRESH_TOKEN(UNAUTHORIZED, "M004", "리프레시 토큰으로 멤버를 찾을 수 없습니다."),
-    INVALID_REFRESH_TOKEN(UNAUTHORIZED, "M005", "잘못된 리프레시 토큰입니다."),
-    INVALID_MEMBER_ROLE(BAD_REQUEST, "M006", "잘못된 사용자 권한입니다."),
+    NOT_FOUND_MEMBER_BY_REFRESH_TOKEN(UNAUTHORIZED, "M005", "리프레시 토큰으로 멤버를 찾을 수 없습니다."),
+    INVALID_REFRESH_TOKEN(UNAUTHORIZED, "M006", "잘못된 리프레시 토큰입니다."),
+    INVALID_MEMBER_ROLE(BAD_REQUEST, "M007", "잘못된 사용자 권한입니다."),
+    UNAUTHORIZED_GET_MEMBERS(UNAUTHORIZED, "M008", "MEMBER는 회원 조회를 할 수 없습니다.")
     ;
 
     private final HttpStatus httpStatus;

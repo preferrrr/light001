@@ -95,4 +95,16 @@ public class MemberExceptionHandler {
         );
     }
 
+    @ExceptionHandler(UnauthorizedGetMembersException.class)
+    public ResponseEntity<ExceptionResponse> handleUnauthorizedGetMembersException(final UnauthorizedGetMembersException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[unauthorized get members exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
+
 }
