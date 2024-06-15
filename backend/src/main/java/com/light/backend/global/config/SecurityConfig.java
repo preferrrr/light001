@@ -52,6 +52,11 @@ public class SecurityConfig {
                     auth.requestMatchers(HttpMethod.POST, MEMBER_PREFIX + "/login").permitAll();
                     auth.requestMatchers(HttpMethod.GET, MEMBER_PREFIX + "/reissue").permitAll();
 
+                    auth.requestMatchers(HttpMethod.GET, SLOT_PREFIX).hasAnyAuthority(MASTER, ADMIN, MEMBER);
+                    auth.requestMatchers(HttpMethod.POST, SLOT_PREFIX).hasAnyAuthority(ADMIN);
+                    auth.requestMatchers(HttpMethod.PATCH, SLOT_PREFIX).hasAnyAuthority(MASTER, ADMIN, MEMBER);
+                    auth.requestMatchers(HttpMethod.GET, SLOT_PREFIX+"/dashboard").hasAnyAuthority(MASTER, ADMIN, MEMBER);
+                    
                 })
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class);
