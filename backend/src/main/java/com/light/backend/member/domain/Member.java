@@ -1,6 +1,7 @@
 package com.light.backend.member.domain;
 
 import com.light.backend.global.BaseEntity;
+import com.light.backend.slot.domain.Slot;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +13,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.util.List;
 
 @Entity
-@Table(name = "member")
+@Table(name = "member", indexes = {
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert @DynamicUpdate
@@ -38,6 +41,9 @@ public class Member extends BaseEntity {
     //내가 생성한 계정
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     private List<Member> createdMembers;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    private List<Slot> slots;
 
     @Builder
     private Member(String id, String password, MemberRole role, Member createdBy) {
