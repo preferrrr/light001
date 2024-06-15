@@ -83,7 +83,7 @@ public class Slot extends BaseEntity {
     }
 
     public void updateErrorState(boolean isError) {
-        if (isError)
+        if (!isError)
             this.slotErrorState = SlotErrorState.Y;
         else
             this.slotErrorState = SlotErrorState.N;
