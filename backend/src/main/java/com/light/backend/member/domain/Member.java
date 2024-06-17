@@ -38,6 +38,8 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "created_by")
     private Member createdBy;
 
+    private String description;
+
     //내가 생성한 계정
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     private List<Member> createdMembers;
@@ -46,19 +48,21 @@ public class Member extends BaseEntity {
     private List<Slot> slots;
 
     @Builder
-    private Member(String id, String password, MemberRole role, Member createdBy) {
+    private Member(String id, String password, MemberRole role, Member createdBy, String description) {
         this.id = id;
         this.password = password;
         this.role = role;
         this.createdBy = createdBy;
+        this.description = description;
     }
 
-    public static Member create(String id, String password, MemberRole role, Member createdBy) {
+    public static Member create(String id, String password, MemberRole role, Member createdBy, String description) {
         return Member.builder()
                 .id(id)
                 .password(password)
                 .role(role)
                 .createdBy(createdBy)
+                .description(description)
                 .build();
     }
 

@@ -25,11 +25,14 @@ public class SignupRequest {
     @NotNull(message = "권한은 null 또는 공백일 수 없습니다.")
     private MemberRole role;
 
+    private String description;
+
     @Builder
-    public SignupRequest(String id, String password, MemberRole role) {
+    public SignupRequest(String id, String password, MemberRole role, String description) {
         this.id = id;
         this.password = password;
         this.role = role;
+        this.description = description;
     }
 
     public Member toEntity(String password, Member member) {
@@ -37,7 +40,8 @@ public class SignupRequest {
                 this.id,
                 password,
                 this.role,
-                member
+                member,
+                description
         );
     }
 }
