@@ -62,21 +62,23 @@ public class Slot extends BaseEntity {
     private SlotErrorState slotErrorState =  SlotErrorState.D;
 
     @Builder
-    private Slot(Member owner) {
+    private Slot(int day, Member owner, LocalDate now) {
         this.owner = owner;
+        this.startAt = now.plusDays(1);
+        this.endAt = startAt.plusDays(day);
     }
 
-    public static Slot create(Member owner) {
+    public static Slot create(int day, Member owner, LocalDate now) {
         return Slot.builder()
                 .owner(owner)
+                .day(day)
+                .now(now)
                 .build();
     }
 
     public void setData(SetSlotDataRequest request) {
         this.mid = request.getMid();
         this.originMid = request.getOriginMid();
-        this.startAt = request.getStartAt();
-        this.endAt = this.startAt.plusDays(request.getDay());
         this.workKeyword = request.getWorkKeyword();
         this.rankKeyword = request.getRankKeyword();
         this.description = request.getDescription();

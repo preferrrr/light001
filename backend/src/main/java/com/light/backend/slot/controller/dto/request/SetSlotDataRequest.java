@@ -22,12 +22,6 @@ public class SetSlotDataRequest {
     @NotBlank(message = "원부 mid는 null 또는 공백일 수 없습니다.")
     private String originMid;
 
-    @NotNull(message = "시작날짜는 null 또는 공백일 수 없습니다.")
-    private LocalDate startAt;
-
-    @NotNull(message = "day는 null 또는 공백일 수 없습니다.")
-    private int day;
-
     @NotBlank(message = "작업 키워드는 null 또는 공백일 수 없습니다.")
     private String workKeyword;
 
@@ -41,8 +35,6 @@ public class SetSlotDataRequest {
         this.id = id;
         this.mid = mid;
         this.originMid = originMid;
-        this.startAt = startAt;
-        this.day = day;
         this.workKeyword = workKeyword;
         this.rankKeyword = rankKeyword;
         this.description = description;

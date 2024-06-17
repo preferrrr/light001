@@ -32,7 +32,7 @@ public class SlotController {
     @PostMapping("")
     public ApiResponse<Void> createSlot(@RequestBody @Valid CreateSlotRequest request) {
 
-        slotService.createSlot(request);
+        slotService.createSlot(request, LocalDate.now());
 
         return ApiResponse.of(
                 CREATE_SLOT

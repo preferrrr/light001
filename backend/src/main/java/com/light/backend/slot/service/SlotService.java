@@ -28,7 +28,7 @@ public class SlotService {
     private final NaverOpenApiService naverOpenApiService;
 
     @Transactional(readOnly = false)
-    public void createSlot(CreateSlotRequest request) {
+    public void createSlot(CreateSlotRequest request, LocalDate now) {
 
         //생성시켜줄 관리자
         Member admin = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
@@ -42,7 +42,7 @@ public class SlotService {
         //관리자가 생성한 멤버가 맞는지 확인
         slotServiceSupport.checkCreatedByAdmin(member.getCreatedBy().getId(), admin.getId());
 
-        Slot slot = request.toEntity(member);
+        Slot slot = request.toEntity(member, now);
 
         slotServiceSupport.save(slot);
 
