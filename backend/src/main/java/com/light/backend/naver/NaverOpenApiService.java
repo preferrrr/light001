@@ -9,10 +9,12 @@ public class NaverOpenApiService {
 
     private final NaverOpenApiCaller naverOpenApiCaller;
 
-    public boolean checkIsErrorSlot(String keyword, String originMid) {
+    private static String PREFIX = "\"productId\":\"";
+    private static String POSTFIX = "\"";
 
+    public boolean checkIsErrorSlot(String keyword, String originMid) {
         String response = naverOpenApiCaller.call(keyword);
 
-        return response.contains(originMid);
+        return response.contains(PREFIX + originMid + POSTFIX);
     }
 }
