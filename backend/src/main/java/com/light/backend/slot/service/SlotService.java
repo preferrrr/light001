@@ -57,14 +57,14 @@ public class SlotService {
         //데이터를 저장할 슬롯
         Slot slot = slotServiceSupport.getSlotById(request.getId());
 
-        //슬롯의 데이터를 수정할 수 있는지 권한 확인
+        //슬롯의 데이터를 저장할 수 있는지 권한 확인
         slotServiceSupport.checkSetSlotDataAuthority(currentMember, slot.getOwner());
 
         //슬롯 데이터 수정
         slot.setData(request);
 
         //네이버 open api로 잘못된 origin mid인지 확인
-        boolean isError = naverOpenApiService.checkIsErrorSlot(request.getRankKeyword(), request.getOriginMid()); //네이버 open api 호출
+        boolean isError = naverOpenApiService.checkIsErrorSlot(request.getWorkKeyword(), request.getOriginMid()); //네이버 open api 호출
 
         //error state default에서 변경
         slot.updateErrorState(isError);
@@ -91,4 +91,5 @@ public class SlotService {
         //대시 보드로 슬롯 현황 통계 조회
         return slotServiceSupport.getDashboard(currentMember, now);
     }
+
 }
