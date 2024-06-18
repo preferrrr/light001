@@ -40,12 +40,14 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
                         totalSlot(currentMember),
                         runningSlot(currentMember, now),
                         closedSlot(currentMember, now),
-                        member.createdAt
+                        member.createdAt,
+                        member.description
                 ))
                 .from(member)
                 .leftJoin(member.slots, slot)
                 .where(memberCondition(currentMember))
                 .groupBy(member.id)
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(member.createdAt.desc())
                 .fetch();
