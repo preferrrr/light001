@@ -13,14 +13,16 @@ public class GetMembersResponse {
     private int running;
     private int closed;
     private LocalDateTime createdAt;
+    private String description;
 
     @QueryProjection
-    public GetMembersResponse(String member, String admin, int total, int running, int closed, LocalDateTime createdAt) {
+    public GetMembersResponse(String member, String admin, int total, int running, int closed, LocalDateTime createdAt, String description) {
         this.member = member;
         this.admin = admin;
         this.total = total;
         this.running = running;
         this.closed = closed;
         this.createdAt = createdAt;
+        this.description = description;
     }
 }
