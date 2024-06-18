@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,9 +44,12 @@ public class SlotService {
         //관리자가 생성한 멤버가 맞는지 확인
         slotServiceSupport.checkCreatedByAdmin(member.getCreatedBy().getId(), admin.getId());
 
-        Slot slot = request.toEntity(member, now);
+        List<Slot> slots = new ArrayList<>();
+        for (int i = 0 ; i < request.getCount(); i++) {
+            slots.add(request.toEntity(member, now));
+        }
 
-        slotServiceSupport.save(slot);
+        slotServiceSupport.saveSlots(slots);
 
     }
 

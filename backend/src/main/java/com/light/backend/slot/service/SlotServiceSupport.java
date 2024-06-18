@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -67,5 +68,9 @@ public class SlotServiceSupport {
 
     public GetDashboardResponse getDashboard(Member member, LocalDate now) {
         return slotRepository.getDashboard(member, now);
+    }
+
+    public void saveSlots(List<Slot> slots) {
+        slotRepository.saveAll(slots);
     }
 }
