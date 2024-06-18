@@ -77,8 +77,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("*"); // CORS 문제, 포스트맨에는 보이지만 클라이언트에서 안 보이는거 해결
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
