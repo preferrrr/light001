@@ -19,7 +19,6 @@ public class SetSlotDataRequest {
     @NotBlank(message = "mid는 null 또는 공백일 수 없습니다.")
     private String mid;
 
-    @NotBlank(message = "원부 mid는 null 또는 공백일 수 없습니다.")
     private String originMid;
 
     @NotBlank(message = "작업 키워드는 null 또는 공백일 수 없습니다.")
