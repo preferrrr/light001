@@ -70,4 +70,16 @@ public class SlotExceptionHandler {
                 exceptionCode.getHttpStatus()
         );
     }
+
+    @ExceptionHandler(UnauthorizedDeleteSlotException.class)
+    public ResponseEntity<ExceptionResponse> handleUnauthorizedDeleteSlotException(final UnauthorizedDeleteSlotException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[unauthorized delete slot exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
 }
