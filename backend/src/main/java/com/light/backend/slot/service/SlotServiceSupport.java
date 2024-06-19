@@ -73,4 +73,13 @@ public class SlotServiceSupport {
     public void saveSlots(List<Slot> slots) {
         slotRepository.saveAll(slots);
     }
+
+    public void checkDeleteAuthority(MemberRole role) {
+        if (!role.equals(MemberRole.MASTER))
+            throw new UnauthorizedDeleteSlotException();
+    }
+
+    public void deleteSlot(Slot slot) {
+        slotRepository.delete(slot);
+    }
 }
