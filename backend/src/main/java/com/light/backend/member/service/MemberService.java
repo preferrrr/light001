@@ -29,7 +29,7 @@ public class MemberService {
         Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
 
         //admin : member 생성만 가능, member : 생성 불가능
-        memberServiceSupport.checkAuthority(currentMember.getRole(), request.getRole());
+        memberServiceSupport.checkAuthority(currentMember.getRole());
 
         //이미 가입한 아이디인지 확인
         memberServiceSupport.checkIdExists(request.getId());

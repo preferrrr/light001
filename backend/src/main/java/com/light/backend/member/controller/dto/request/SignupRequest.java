@@ -22,24 +22,25 @@ public class SignupRequest {
     @Size(min = 4, max = 20, message = "비밀번호는 4 ~ 20자여야 합니다.")
     private String password;
 
-    @NotNull(message = "권한은 null 또는 공백일 수 없습니다.")
-    private MemberRole role;
-
     private String description;
 
     @Builder
     public SignupRequest(String id, String password, MemberRole role, String description) {
         this.id = id;
         this.password = password;
-        this.role = role;
         this.description = description;
     }
 
     public Member toEntity(String password, Member member) {
+        MemberRole role = MemberRole.MEMBER;
+
+        if (member.getRole().equals(MemberRole.MASTER))
+            role = MemberRole.ADMIN;
+
         return Member.create(
                 this.id,
                 password,
-                this.role,
+                role,
                 member,
                 description
         );

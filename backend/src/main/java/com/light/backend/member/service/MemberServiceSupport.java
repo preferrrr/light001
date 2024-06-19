@@ -35,8 +35,8 @@ public class MemberServiceSupport {
         return memberRepository.findById(id).orElseThrow(NotFoundMemberException::new);
     }
 
-    public void checkAuthority(MemberRole currentMemberRole, MemberRole createMemberRole) {
-        if (currentMemberRole.equals(MEMBER) || (currentMemberRole.equals(ADMIN) && !createMemberRole.equals(MEMBER)))
+    public void checkAuthority(MemberRole currentMemberRole) {
+        if (currentMemberRole.equals(MEMBER))
             throw new UnauthorizedCreateMemberException();
     }
 
@@ -77,7 +77,6 @@ public class MemberServiceSupport {
                 .build();
 
         headers.add(HttpHeaders.COOKIE, cookie.toString()); // refresh token
-
         return headers;
     }
 
