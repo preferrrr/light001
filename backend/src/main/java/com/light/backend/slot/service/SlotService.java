@@ -97,4 +97,19 @@ public class SlotService {
         return slotServiceSupport.getDashboard(currentMember, now);
     }
 
+    @Transactional(readOnly = false)
+    public void deleteSlot(Long slotId) {
+
+        //현재 멤버
+        Member currentMember = memberServiceSupport.getMemberById(currentMemberGetter.getCurrentMemberId());
+
+        //MASTER가 맞는지 확인
+        slotServiceSupport.checkDeleteAuthority(currentMember.getRole());
+
+        //삭제할 슬롯
+        Slot slot = slotServiceSupport.getSlotById(slotId);
+
+        //슬롯 삭제
+        slotServiceSupport.deleteSlot(slot);
+    }
 }
