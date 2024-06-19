@@ -69,7 +69,7 @@ public class SlotService {
         slot.setData(request);
 
         //네이버 open api로 잘못된 origin mid인지 확인
-        boolean isError = naverOpenApiService.checkIsErrorSlot(request.getWorkKeyword(), request.getOriginMid()); //네이버 open api 호출
+        boolean isError = naverOpenApiService.checkIsErrorSlot(request.getWorkKeyword(), request.getOriginMid(), request.getMid()); //네이버 open api 호출
 
         //error state default에서 변경
         slot.updateErrorState(isError);
