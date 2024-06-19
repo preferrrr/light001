@@ -58,6 +58,7 @@ public class SecurityConfig {
 
                     auth.requestMatchers(HttpMethod.GET, SLOT_PREFIX).hasAnyAuthority(MASTER, ADMIN, MEMBER);
                     auth.requestMatchers(HttpMethod.POST, SLOT_PREFIX).hasAnyAuthority(ADMIN);
+                    auth.requestMatchers(HttpMethod.DELETE, SLOT_PREFIX).hasAnyAuthority(MASTER);
                     auth.requestMatchers(HttpMethod.PATCH, SLOT_PREFIX).hasAnyAuthority(MASTER, ADMIN, MEMBER);
                     auth.requestMatchers(HttpMethod.GET, SLOT_PREFIX+"/dashboard").hasAnyAuthority(MASTER, ADMIN, MEMBER);
                     
@@ -81,7 +82,8 @@ public class SecurityConfig {
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
         configuration.addAllowedHeader("*");
-        configuration.addExposedHeader("*"); // CORS 문제, 포스트맨에는 보이지만 클라이언트에서 안 보이는거 해결
+        configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("Cookie");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

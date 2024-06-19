@@ -83,4 +83,19 @@ public class SlotController {
                 GET_DASHBOARD
         );
     }
+
+    /**
+     * 슬롯 삭제
+     * DELETE
+     * /slots?id=
+     */
+    @DeleteMapping("")
+    public ApiResponse<Void> deleteSlot(@RequestParam(name = "id", required = true) Long id) {
+
+        slotService.deleteSlot(id);
+
+        return ApiResponse.of(
+                DELETE_SLOT
+        );
+    }
 }
