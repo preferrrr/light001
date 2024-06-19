@@ -113,7 +113,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
     private NumberExpression<Integer> errorSlot(LocalDate now) {
         return new CaseBuilder()
-                .when(slot.startAt.loe(now).and(slot.endAt.goe(now)).and(slot.slotErrorState.eq(SlotErrorState.Y)))
+                .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)).and(slot.slotErrorState.eq(SlotErrorState.Y)))
                 .then(1)
                 .otherwise(0)
                 .sum();
