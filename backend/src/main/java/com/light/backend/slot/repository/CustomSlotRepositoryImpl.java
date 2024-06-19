@@ -81,7 +81,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
     private NumberExpression<Integer> waitingSlot() {
         return new CaseBuilder()
-                .when(slot.mid.isNull())
+                .when(slot.slotErrorState.eq(SlotErrorState.D))
                 .then(1)
                 .otherwise(0)
                 .sum();
@@ -89,7 +89,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
     private NumberExpression<Integer> runningSlot(LocalDate now) {
         return new CaseBuilder()
-                .when(slot.startAt.loe(now).and(slot.endAt.goe(now)))
+                .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)).and(slot.slotErrorState.eq(SlotErrorState.N)))
                 .then(1)
                 .otherwise(0)
                 .sum();
@@ -97,7 +97,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
     private NumberExpression<Integer> closedSlot(LocalDate now) {
         return new CaseBuilder()
-                .when(slot.endAt.eq(now.minusDays(1)))
+                .when(slot.endAt.eq(now.minusDays(3)))
                 .then(1)
                 .otherwise(0)
                 .sum();
@@ -105,7 +105,7 @@ public class CustomSlotRepositoryImpl implements CustomSlotRepository {
 
     private NumberExpression<Integer> expiringSlot(LocalDate now) {
         return new CaseBuilder()
-                .when(slot.endAt.between(now, now.plusDays(2)))
+                .when(slot.endAt.between(now, now.plusDays(3)))
                 .then(1)
                 .otherwise(0)
                 .sum();
