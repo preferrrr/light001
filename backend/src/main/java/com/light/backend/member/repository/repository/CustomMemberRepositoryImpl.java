@@ -76,7 +76,7 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
     private NumberExpression<Integer> runningSlot(Member currentMember, LocalDate now) {
         if (currentMember.getRole().equals(MemberRole.ADMIN))
             return new CaseBuilder()
-                    .when(slot.startAt.loe(now).and(slot.endAt.goe(now)))
+                    .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)))
                     .then(1)
                     .otherwise(0)
                     .sum();
@@ -85,14 +85,14 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
                     .when(member.role.eq(MemberRole.ADMIN))
                     .then(
                             new CaseBuilder()
-                                    .when(slot.startAt.loe(now).and(slot.endAt.goe(now)))
+                                    .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)))
                                     .then(1)
                                     .otherwise(0)
                                     .sum()
                                     .add(
                                             jpaQueryFactory
                                                     .select(new CaseBuilder()
-                                                            .when(slot.startAt.loe(now).and(slot.endAt.goe(now)))
+                                                            .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)))
                                                             .then(1)
                                                             .otherwise(0)
                                                             .sum())
@@ -102,7 +102,7 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
                     )
                     .otherwise(
                             new CaseBuilder()
-                                    .when(slot.startAt.loe(now).and(slot.endAt.goe(now)))
+                                    .when(slot.startAt.loe(now.plusDays(1)).and(slot.endAt.goe(now)))
                                     .then(1)
                                     .otherwise(0)
                                     .sum()
@@ -112,7 +112,7 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
     private NumberExpression<Integer> closedSlot(Member currentMember, LocalDate now) {
         if (currentMember.getRole().equals(MemberRole.ADMIN)) //ADMIN인 경우
             return new CaseBuilder()
-                    .when(slot.endAt.eq(now.minusDays(1)))
+                    .when(slot.endAt.eq(now.minusDays(3)))
                     .then(1)
                     .otherwise(0)
                     .sum();
@@ -121,14 +121,14 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
                     .when(member.role.eq(MemberRole.ADMIN))
                     .then(
                             new CaseBuilder()
-                                    .when(slot.endAt.eq(now.minusDays(1)))
+                                    .when(slot.endAt.eq(now.minusDays(3)))
                                     .then(1)
                                     .otherwise(0)
                                     .sum()
                                     .add(
                                             jpaQueryFactory
                                                     .select(new CaseBuilder()
-                                                            .when(slot.endAt.eq(now.minusDays(1)))
+                                                            .when(slot.endAt.eq(now.minusDays(3)))
                                                             .then(1)
                                                             .otherwise(0)
                                                             .sum())
@@ -138,7 +138,7 @@ public class CustomMemberRepositoryImpl implements CustomMemberRepository {
                     )
                     .otherwise(
                             new CaseBuilder()
-                                    .when(slot.endAt.eq(now.minusDays(1)))
+                                    .when(slot.endAt.eq(now.minusDays(3)))
                                     .then(1)
                                     .otherwise(0)
                                     .sum()
