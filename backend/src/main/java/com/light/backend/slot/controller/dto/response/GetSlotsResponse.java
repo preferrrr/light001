@@ -2,6 +2,7 @@ package com.light.backend.slot.controller.dto.response;
 
 import com.light.backend.slot.domain.Slot;
 import com.light.backend.slot.domain.SlotErrorState;
+import com.light.backend.slot.domain.SlotPaymentState;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -34,6 +35,8 @@ public class GetSlotsResponse {
 
     private SlotErrorState slotErrorState;
 
+    private SlotPaymentState slotPaymentState;
+
     @Builder
     private GetSlotsResponse(Slot slot) {
         this.id = slot.getId();
@@ -48,6 +51,7 @@ public class GetSlotsResponse {
         this.currentRank = slot.getCurrentRank();
         this.description = slot.getDescription();
         this.slotErrorState = slot.getSlotErrorState();
+        this.slotPaymentState = slot.getSlotPaymentState();
     }
 
     public static GetSlotsResponse of(Slot slot) {

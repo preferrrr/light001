@@ -1,5 +1,6 @@
 package com.light.backend.slot.controller.dto.request;
 
+import com.light.backend.slot.domain.SlotPaymentState;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -29,13 +30,16 @@ public class SetSlotDataRequest {
 
     private String description;
 
+    private SlotPaymentState slotPaymentState;
+
     @Builder
-    public SetSlotDataRequest(Long id, String mid, String originMid, LocalDate startAt, int day, String workKeyword, String rankKeyword, String description) {
+    public SetSlotDataRequest(Long id, String mid, String originMid, LocalDate startAt, int day, String workKeyword, String rankKeyword, String description, SlotPaymentState slotPaymentState) {
         this.id = id;
         this.mid = mid;
         this.originMid = originMid;
         this.workKeyword = workKeyword;
         this.rankKeyword = rankKeyword;
         this.description = description;
+        this.slotPaymentState = slotPaymentState;
     }
 }

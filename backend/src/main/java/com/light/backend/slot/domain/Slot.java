@@ -57,9 +57,13 @@ public class Slot extends BaseEntity {
     @Column
     private String description;
 
-    @Column(name = "slot_error_state")
+    @Column(name = "error_state")
     @Enumerated(EnumType.STRING)
     private SlotErrorState slotErrorState =  SlotErrorState.D;
+
+    @Column(name = "payment_state")
+    @Enumerated(EnumType.STRING)
+    private SlotPaymentState slotPaymentState = SlotPaymentState.N;
 
     @Builder
     private Slot(int day, Member owner, LocalDate now) {
@@ -82,6 +86,7 @@ public class Slot extends BaseEntity {
         this.workKeyword = request.getWorkKeyword();
         this.rankKeyword = request.getRankKeyword();
         this.description = request.getDescription();
+        this.slotPaymentState = request.getSlotPaymentState();
     }
 
     public void updateErrorState(boolean isError) {
@@ -90,4 +95,5 @@ public class Slot extends BaseEntity {
         else
             this.slotErrorState = SlotErrorState.N;
     }
+
 }
