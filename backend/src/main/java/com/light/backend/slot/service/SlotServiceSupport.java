@@ -2,9 +2,11 @@ package com.light.backend.slot.service;
 
 import com.light.backend.member.domain.Member;
 import com.light.backend.member.domain.MemberRole;
+import com.light.backend.slot.controller.dto.request.SetSlotDataRequest;
 import com.light.backend.slot.controller.dto.response.GetDashboardResponse;
 import com.light.backend.slot.controller.dto.response.GetSlotsResponse;
 import com.light.backend.slot.domain.Slot;
+import com.light.backend.slot.domain.SlotPaymentState;
 import com.light.backend.slot.exception.*;
 import com.light.backend.slot.repository.SlotRepository;
 import lombok.RequiredArgsConstructor;
@@ -81,5 +83,11 @@ public class SlotServiceSupport {
 
     public void deleteSlot(Slot slot) {
         slotRepository.delete(slot);
+    }
+
+    public void checkUpdatePaymentStateAuthority(Member member, SlotPaymentState origin, SlotPaymentState request) {
+        if (!member.getRole().equals(MemberRole.MASTER) && !origin.equals(request)) {
+            throw new UnauthorizedUpdatePaymentStateException();
+        }
     }
 }

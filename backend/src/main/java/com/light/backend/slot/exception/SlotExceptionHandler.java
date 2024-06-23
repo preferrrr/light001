@@ -82,4 +82,16 @@ public class SlotExceptionHandler {
                 exceptionCode.getHttpStatus()
         );
     }
+
+    @ExceptionHandler(UnauthorizedUpdatePaymentStateException.class)
+    public ResponseEntity<ExceptionResponse> handleUnauthorizedUpdatePaymentStateException(final UnauthorizedUpdatePaymentStateException e) {
+
+        ExceptionCode exceptionCode = e.getExceptionCode();
+        log.error("[unauthorized update payment exception] {}", e.getMessage());
+
+        return new ResponseEntity<>(
+                ExceptionResponse.of(exceptionCode),
+                exceptionCode.getHttpStatus()
+        );
+    }
 }

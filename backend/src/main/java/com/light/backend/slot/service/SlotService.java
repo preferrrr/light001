@@ -65,6 +65,9 @@ public class SlotService {
         //슬롯의 데이터를 저장할 수 있는지 권한 확인
         slotServiceSupport.checkSetSlotDataAuthority(currentMember, slot.getOwner());
 
+        //결제 상태 변경 권한 있는지 확인
+        slotServiceSupport.checkUpdatePaymentStateAuthority(currentMember, slot.getSlotPaymentState(), request.getSlotPaymentState());
+
         //슬롯 데이터 수정
         slot.setData(request);
 

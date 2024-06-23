@@ -17,6 +17,7 @@ public enum SlotExceptionCode implements ExceptionCode {
     UNAUTHORIZED_SET_SLOT_DATA(UNAUTHORIZED, "S004", "슬롯 데이터를 입력할 권한이 없습니다."),
     INVALID_QUERY_STRING_FOR_GET_SLOTS(BAD_REQUEST, "S005", "잘못된 슬롯 조회 쿼리 스트링 입니다."),
     UNAUTHORIZED_DELETE_SLOT(UNAUTHORIZED, "S006", "슬롯을 삭제할 권한이 없습니다."),
+    UNAUTHORIZED_UPDATE_PAYMENT(UNAUTHORIZED, "S007", "결제 상태를 변경할 권한이 없습니다."),
     ;
 
     private final HttpStatus httpStatus;
