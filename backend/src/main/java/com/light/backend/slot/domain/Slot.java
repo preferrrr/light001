@@ -18,7 +18,7 @@ import java.time.LocalDate;
         @Index(name = "idx_origin_mid", columnList = "origin_mid"),
         @Index(name = "idx_mid", columnList = "mid"),
         @Index(name = "idx_end_at", columnList = "end_at"),
-        @Index(name = "idx_start_at_end_at_error_state", columnList = "start_at, end_at, slot_error_state")
+        @Index(name = "idx_start_at_end_at_error_state", columnList = "start_at, end_at, error_state")
 })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
