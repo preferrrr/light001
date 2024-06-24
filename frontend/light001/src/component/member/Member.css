@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+}
+
+.container {
+    display: flex;
+    min-width: 100vw;
+    height: 100vh;
+    overflow-x:hidden;
+}
+
+.left-panel {
+    height: 100vh;
+    width: 200px;
+}
+
+/**************************************/
+
+.right-member {
+    width: 100%;
+    height: max-content;
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center; 
+}
+
+.member-wrap {
+    width: 100%;
+    height: max-content;
+}
+
+.paginationWrap {
+    width: max-content;
+    height: 20vh;
+    margin-top: 20px; 
+
+}
+
+.signup-wrap {
+    height: max-content;
+    display: flex;
+}
+
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    margin: 20px;
+}
+
+.signup-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+.signup-form h2 {
+    margin-bottom: 20px;
+}
+
+.signup-form input {
+    width: 100%; /* 입력 필드 양 끝에 10px의 여백 추가 */
+    padding: 10px;
+    margin: 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* 패딩을 포함한 전체 너비 계산 */
+}
+
+.signup-form button {
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #555;
+}
+
+.signup-form label {
+    margin: 10px 0;
+    display: block;
+    text-align: left;
+}
+
+button.disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
